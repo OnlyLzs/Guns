@@ -1,6 +1,7 @@
 server:
   port: 80
   max-http-header-size: 10240
+  
 
 guns:
   swagger-open: true                #是否开启swagger (true/false)
