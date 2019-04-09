@@ -23,7 +23,9 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
     $('#pcodeName').click(function () {
         var formName = encodeURIComponent("parent.MenuInfoDlg.data.pcodeName");
         var formId = encodeURIComponent("parent.MenuInfoDlg.data.pid");
-        var treeUrl = encodeURIComponent(Feng.ctxPath + "/menu/selectMenuTreeList");
+//        var treeUrl = encodeURIComponent(Feng.ctxPath + "/menu/selectMenuTreeList");
+        var treeUrl = encodeURIComponent("/menu/selectMenuTreeList");
+        console.log("Feng.ctxPath:"+Feng.ctxPath);
 
         layer.open({
             type: 2,
