@@ -138,5 +138,10 @@ public interface IConstantFactory {
      * 获取所有父部门id
      */
     List<Long> getParentDeptIds(Long deptId);
+    
+    /*
+     * 获取图片请求地址
+     */
+    String getPicutureRequestPath(String name);
 
 }

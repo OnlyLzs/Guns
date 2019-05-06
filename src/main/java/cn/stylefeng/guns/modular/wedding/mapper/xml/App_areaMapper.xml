@@ -2,4 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.stylefeng.guns.modular.wedding.mapper.App_areaMapper">
 
+	<select id="selectMenuTree" resultType="java.util.Map">
+        select
+       	 *
+        from app_area
+        where STATUS = 1
+        <if test="condition != null and condition != ''">
+            and (NAME like CONCAT('%',#{condition},'%') or id like CONCAT('%',#{condition},'%'))
+        </if>
+        <if test="level != null and level != ''">
+            and LEVEL = #{level}
+        </if>
+    </select>
+    
+    <select id="menuTreeList" resultType="cn.stylefeng.guns.core.common.node.ZTreeNode">
+        select 
+		a1.id AS id,
+		(
+		CASE
+		WHEN (a2.id = 0 OR a2.id IS NULL) THEN
+		0
+		ELSE
+		a2.id
+		END
+		) AS pId,
+		a1.NAME
+		AS NAME,
+		(
+		CASE
+		WHEN (a2.id = 0 OR a2.id IS NULL) THEN
+		'true'
+		ELSE
+		'false'
+		END
+		) as open 
+		from app_area a1 LEFT JOIN app_area a2
+		on a1.parent_id = a2.id
+		order by
+		a1.id
+    </select>
 </mapper>

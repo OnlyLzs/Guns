@@ -22,11 +22,14 @@ import cn.stylefeng.guns.core.common.constant.cache.CacheKey;
 import cn.stylefeng.guns.core.common.constant.state.ManagerStatus;
 import cn.stylefeng.guns.core.common.constant.state.MenuStatus;
 import cn.stylefeng.guns.core.log.LogObjectHolder;
+import cn.stylefeng.guns.core.util.ConfigProperties;
 import cn.stylefeng.guns.modular.system.entity.*;
 import cn.stylefeng.guns.modular.system.mapper.*;
 import cn.stylefeng.roses.core.util.SpringContextHolder;
 import cn.stylefeng.roses.core.util.ToolUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
@@ -43,7 +46,11 @@ import java.util.List;
 @Component
 @DependsOn("springContextHolder")
 public class ConstantFactory implements IConstantFactory {
-
+	
+	
+	@Autowired
+	private ConfigProperties configProperties;
+	
     private RoleMapper roleMapper = SpringContextHolder.getBean(RoleMapper.class);
     private DeptMapper deptMapper = SpringContextHolder.getBean(DeptMapper.class);
     private DictMapper dictMapper = SpringContextHolder.getBean(DictMapper.class);
@@ -326,6 +333,11 @@ public class ConstantFactory implements IConstantFactory {
         }
         return parentDeptIds;
     }
+
+	@Override
+	public String getPicutureRequestPath(String name) {
+		return  configProperties.getPictureServer() + name;
+	}
 
 
 }

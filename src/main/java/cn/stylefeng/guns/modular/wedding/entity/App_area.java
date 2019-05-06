@@ -37,7 +37,10 @@ public class App_area implements Serializable {
      */
     @TableField("level")
     private String level;
-
+    
+    @TableField("img_url")
+    private String img_url;
+    
     @TableField("status")
     private Integer status;
 

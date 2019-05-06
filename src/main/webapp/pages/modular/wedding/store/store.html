@@ -1,7 +1,7 @@
-@layout("/common/_container.html",{js:["/assets/modular/wedding/picture/picture.js"]}){
+@layout("/common/_container.html",{js:["/assets/modular/wedding/store/store.js"]}){
 
 <div class="layui-body-header">
-    <span class="layui-body-header-title">轮播图管理</span>
+    <span class="layui-body-header-title">店铺管理</span>
 </div>
 
 <div class="layui-fluid">
@@ -12,7 +12,7 @@
                     <div class="layui-form toolbar">
                         <div class="layui-form-item">
                             <div class="layui-inline">
-                                <input id="imgUrl" class="layui-input" type="text" placeholder="图片名称"/>
+                                <input id="name" class="layui-input" type="text" placeholder="店铺名称"/>
                             </div>
                             <div class="layui-inline">
                                 <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
@@ -23,23 +23,20 @@
                             </div>
                         </div>
                     </div>
-                    <table class="layui-table" id="pictureTable" lay-filter="pictureTable"></table>
+                    <table class="layui-table" id="storeTable" lay-filter="storeTable"></table>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+
 <script type="text/html" id="imgUrlTemplet">
-	{{# if(d.img_req === ""){ }}
+	{{# if(d.img_url === ""){ }}
 		{{ '无' }}
 	{{# }else{ }}
-		{{ '<div style="height:100%;" id="showDiv"><img style="height:100%;" src='+ d.img_req +  '/></div>' }}
+		{{ '<div style="height:100%;" id="showDiv"><img style="height:100%;" src='+ d.img_url +  '/></div>' }}
 	{{# } }}
-</script>
-
-<script type="text/html" id="status">
-	<input type="checkbox" id="status" name="status" value="{{ d.status }}" title="锁定" lay-filter="isDel" {{ d.isDel == true ? 'checked' : '' }}/>
 </script>
 
 <script type="text/html" id="tableBar">
@@ -48,9 +45,6 @@
     @}
     @if(shiro.hasPermission("/role/remove")){
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
-    @}
-    @if(shiro.hasPermission("/role/setAuthority")){
-    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="roleAssign">权限配置</a>
     @}
 </script>
 @}

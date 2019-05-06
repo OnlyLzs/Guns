@@ -1,0 +1,70 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/wedding/area/area.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">菜单管理</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="name" class="layui-input" type="text" placeholder="地址名称/编码"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="level" class="layui-input" type="text" placeholder="层级"/>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                @if(shiro.hasPermission("/menu/add")){
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加</button>
+                                @}
+                                <button id="expandAll" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>展开所有</button>
+                                <button id="foldAll" class="layui-btn icon-btn"><i class="layui-icon">&#xe656;</i>折叠所有</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="areaTable" lay-filter="areaTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="parentIdTemplet">
+	{{# if(d.parent_id === 0){ }}
+		{{ '根元素' }}
+	{{# }else{ }}
+		{{ d.parent_id }}
+	{{# } }}
+</script>
+
+<script type="text/html" id="status">
+	{{# if(d.status === 1){ }}
+		{{ '启用' }}
+	{{# }else if(d.status === 0){ }}
+		{{ '禁用' }}
+	{{# } }}
+</script>
+
+<script type="text/html" id="imgUrl">
+	{{# if(d.img_url === ""){ }}
+		{{ '无' }}
+	{{# }else{ }}
+		{{ '<div style="height:100%;" onclick="showPicture(this)"><img style="height:100%;" src='+ d.img_url +  '/></div>' }}
+	{{# } }}
+</script>
+ 
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("/menu/edit")){
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+    @}
+    @if(shiro.hasPermission("/menu/remove")){
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    @}
+</script>
+
+@}

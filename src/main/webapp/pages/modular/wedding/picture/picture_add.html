@@ -1,0 +1,27 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/wedding/picture/picture_add.js"]}){
+<form id="pictureForm" lay-filter="pictureForm" class="layui-form model-form">
+	<input name="id" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品编号<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input name="remark" placeholder="请输入商品编号" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择图片<span style="color: red;">*</span></label>
+        <div class="layui-upload">
+  			<button type="button" class="layui-btn layui-btn-normal" id="selectPicture">选择文件</button>
+		</div>
+    </div>
+    <div class="layui-form-item">
+    	<label class="layui-form-label">图片预览<span style="color: red;">*</span></label>
+    	<div class="layui-input-block">
+			 <img class="layui-upload-img" id="picture" style="width:180px;height:180px;border:1px solid DodgerBlue;">
+		</div>
+    </div>
+    <div class="layui-form-item text-right">
+		<button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+		<button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+	</div>
+</form>
+@}

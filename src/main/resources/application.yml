@@ -15,12 +15,20 @@ guns:
 beetl:
   resource-auto-check: true         #热加载beetl模板，开发时候用
 
+mybatis-plus.configuration.map-underscore-to-camel-case: false
+
+pictureDisk: E:\productE\images\
+
 spring:
   profiles:
     active: @spring.active@
+  static-path-pattern: /**
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${pictureDisk}
   mvc:
     view:
       prefix: /pages
+
   devtools:
     restart:
       enabled: false
@@ -30,9 +38,12 @@ spring:
     multipart:
       max-request-size: 100MB
       max-file-size: 100MB
-
+  
 mybatis-plus:
   typeAliasesPackage: cn.stylefeng.guns.modular.system.model
-
+  mapper-locations: classpath*:/cn/stylefeng/guns/modular/*/*/*/**Mapper.xml
 log:
   path: guns-logs
+  
+pictureServer: http://localhost:8080/guns/
+  
