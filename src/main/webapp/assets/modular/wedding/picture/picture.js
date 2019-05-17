@@ -22,7 +22,7 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax'], function (){
 			{field: 'img_req', sort: true, title: '图片', align: 'center', templet: '#imgUrlTemplet'},
 			{field: 'status', sort: true, title: '状态', align: 'center'},
 			{field: 'option_id', sort: true, title: '操作ID', align: 'center'},
-			{field: 'remark', sort: true, title: '商品ID', align: 'center'},
+			{field: 'link_url', sort: true, title: '商品ID1', align: 'center'},
 			{field: 'create_time', sort: true, title: '创建时间', align: 'center'},
 			{field: 'update_time', sort: true, title: '修改时间', align: 'center'},
 			{align: 'center', toolbar: '#tableBar', title: '操作', minWidth: 200, align: 'center'}

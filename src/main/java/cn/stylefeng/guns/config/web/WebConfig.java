@@ -42,6 +42,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.Arrays;
 import java.util.Properties;
 
 import static cn.stylefeng.guns.core.common.constant.Const.NONE_PERMISSION_RES;
@@ -155,18 +156,18 @@ public class WebConfig implements WebMvcConfigurer {
         return new DefaultPointcutAdvisor(druidStatPointcut(), druidStatInterceptor());
     }
 
-    /**
-     * xssFilter注册
-     */
-    @Bean
-    public FilterRegistrationBean xssFilterRegistration() {
-        XssFilter xssFilter = new XssFilter();
-        // 这里可以加不被xss过滤的接口
-        // xssFilter.setUrlExclusion(Arrays.asList("/notice/update", "/notice/add"));
-        FilterRegistrationBean registration = new FilterRegistrationBean(xssFilter);
-        registration.addUrlPatterns("/*");
-        return registration;
-    }
+//    /**
+//     * xssFilter注册
+//     */
+//    @Bean
+//    public FilterRegistrationBean xssFilterRegistration() {
+//        XssFilter xssFilter = new XssFilter();
+//        // s这里可以加不被xss过滤的接口
+//        xssFilter.setUrlExclusion(Arrays.asList("/wedding/app_product/*"));
+//        FilterRegistrationBean registration = new FilterRegistrationBean(xssFilter);
+//        registration.addUrlPatterns("/*");
+//        return registration;
+//    }
 
     /**
      * RequestContextListener注册

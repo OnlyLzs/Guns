@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.wedding.mapper.App_userMapper">
+
+	<!-- 查询用户 -->
+	<select id="selectUsers" resultType="map">
+		SELECT
+			*
+		FROM
+			app_user au
+		<if test="condition!=null and condition!=''">
+			WHERE concat_ws(',',au.name,au.tel,au.email,au.qq) like CONCAT('%',#{condition,jdbcType=VARCHAR},'%')
+		</if>
+	</select>
+	<!-- 设置状态 -->
+	<update id="setStatus">
+		update app_user SET app_user.`status` = #{status,jdbcType=INTEGER} where app_user.id = #{userId,jdbcType=INTEGER}
+	</update>
+
+</mapper>

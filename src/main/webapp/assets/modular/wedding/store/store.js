@@ -31,6 +31,7 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax'], function(){
 	Store.search = function (){
 		var queryData = {};
 		queryData['name'] = $("#name").val();
+		console.log("查询"+JSON.stringify(queryData))
 		table.reload(Store.tableId, {where: queryData});
 	};
 	

@@ -34,8 +34,10 @@ public class TestController extends BaseController{
 //		}else {
 //			rootPath = uploadPath;
 //		}
-		String rootPath = request.getSession().getServletContext().getRealPath("/");
-		String configPath="/assets/common/plugins/ueditor/jsp/config.json";
+		/*String rootPath = request.getSession().getServletContext().getRealPath("/");
+		String configPath="/assets/common/plugins/ueditor/jsp/config.json";*/
+		String rootPath = "E:\\picture\\wedding";
+		String configPath = "/config.json";
 		try {
 			request.setCharacterEncoding( "utf-8" );
 			response.setHeader("Content-Type" , "text/html");

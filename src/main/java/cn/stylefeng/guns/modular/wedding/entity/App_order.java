@@ -1,6 +1,8 @@
 package cn.stylefeng.guns.modular.wedding.entity;
 
 import java.math.BigDecimal;
+import java.util.List;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -14,8 +16,8 @@ import lombok.experimental.Accessors;
  * app 订单表
  * </p>
  *
- * @author warren
- * @since 2019-04-12
+ * @author Jason
+ * @since 2019-05-16
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -44,15 +46,31 @@ public class App_order implements Serializable {
      */
     @TableField("product_id")
     private Integer product_id;
-
-    @TableField("img_url")
-    private String img_url;
-
+    
     /**
-     * 跳转地址
+     * 出发城市
      */
-    @TableField("link_url")
-    private String link_url;
+    @TableField("start_city")
+    private String start_city;
+    
+    
+    /**
+     * 出发日期
+     */
+    @TableField("start_date")
+    private String start_date;
+    
+    /**
+     * 购买人信息
+     */
+    @TableField("buyer_name")
+    private String buyer_name;
+
+    @TableField("buyer_mobile")
+    private String buyer_mobile;
+
+    @TableField("buyer_email")
+    private String buyer_email;
 
     /**
      * 实付金额
@@ -74,6 +92,16 @@ public class App_order implements Serializable {
 
     @TableField("update_time")
     private String update_time;
+
+    @TableField(exist=false)
+    App_store store;
+    
+    @TableField(exist=false)
+    App_product product;
+    
+    @TableField(exist=false)
+    List<App_passenger> passengers;
+   
 
 
 }

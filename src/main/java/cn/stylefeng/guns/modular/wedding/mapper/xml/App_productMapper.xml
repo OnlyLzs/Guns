@@ -2,4 +2,63 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.stylefeng.guns.modular.wedding.mapper.App_productMapper">
 
+	<resultMap id="BaseResultMap"
+		type="cn.stylefeng.guns.modular.wedding.entity.App_product">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="store_id" jdbcType="INTEGER" property="store_id" />
+		<result column="numb" jdbcType="VARCHAR" property="numb" />
+		<result column="target_city" jdbcType="INTEGER" property="target_city" />
+		<result column="start_city" jdbcType="VARCHAR" property="start_city" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="description" jdbcType="VARCHAR" property="description" />
+		<result column="price" jdbcType="DOUBLE" property="price" />
+		<result column="product_detail_text" jdbcType="VARCHAR" property="product_detail_text" />
+		<result column="example_img" jdbcType="VARCHAR" property="example_img" />
+		<result column="config" jdbcType="VARCHAR" property="config" />
+		<result column="price_detial" jdbcType="VARCHAR" property="price_detial" />
+		<result column="type" jdbcType="INTEGER" property="type" />
+		<association property="area" javaType="cn.stylefeng.guns.modular.wedding.entity.App_area">
+			<id column="area_id" property="id" />
+			<result column="area_name" property="name" />
+		</association>
+		<collection property="pictureList" ofType="cn.stylefeng.guns.modular.wedding.entity.App_product_picture">
+			<id column="picture_id" property="id" />
+			<result column="picture_img_url" property="img_url" />
+		</collection>
+	</resultMap>
+	
+	
+	<!-- 查询商品 -->
+	<select id="selectProducts" resultType="map">
+		SELECT
+			ap.*,ast.`name` as store_name, aa.`name` as target_city_name
+		FROM
+			app_product ap
+		LEFT JOIN
+			app_store ast
+		ON ast.id = ap.store_id
+		LEFT JOIN
+			app_area aa
+		ON ap.target_city = aa.id
+		<if test="condition!=null and condition!=''">
+			WHERE concat_ws(',',ap.title,ap.description,ap.start_city,aa.name) like CONCAT('%',#{condition,jdbcType=VARCHAR},'%')
+		</if>
+	</select>
+	
+	<update id="setStatus">
+		update app_product SET app_product.`status` = #{status,jdbcType=INTEGER} where app_product.id = #{productId,jdbcType=INTEGER}
+	</update>
+	
+	<select id="getProductInfo" resultMap="BaseResultMap">
+		SELECT
+			ap.*, aa.id area_id,
+			aa. NAME area_name,
+			app.id picture_id,
+			app.img_url picture_img_url
+		FROM
+			app_product ap
+		LEFT JOIN app_product_picture app ON ap.id = app.product_id
+		LEFT JOIN app_area aa ON ap.target_city = aa.id
+		WHERE ap.id = #{productId}
+	</select>
 </mapper>

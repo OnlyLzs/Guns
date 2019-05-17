@@ -1,0 +1,68 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/wedding/order/order.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">订单管理</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="condition" class="layui-input" type="text" placeholder="商品名称/店家名称/联系人姓名"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="timeLimit" class="layui-input" type="text" placeholder="订单生成时间"/>
+                            </div>
+                            <div class="layui-inline">
+                                <select id="orderStatus" name="orderStatus">
+							        <option value="">订单状态</option>
+							        <option value="1">未支付</option>
+							        <option value="2">已支付</option>
+							        <option value="3">已完成</option>
+							        <option value="4">已取消</option>
+							        <option value="7">已删除</option>
+							     </select>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                              
+                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="userTable" lay-filter="userTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">查看订单</a>
+   
+</script>
+
+<script type="text/html" id="statusTpl">
+	{{#  if(d.status == "1"){ }}
+		<span class="layui-badge"><i class="fa fa-mars">未支付</i></span>
+  	{{#  } }}
+  	{{#  if(d.status == "2"){ }}
+		<span class="layui-badge layui-bg-orange"><i class="fa fa-venus">已支付</i></span>
+  	{{#  } }}
+	{{#  if(d.status == "3"){ }}
+		<span class="layui-badge layui-bg-green"><i class="fa fa-venus">已完成</i></span>
+  	{{#  } }}
+	{{#  if(d.status == "4"){ }}
+		<span class="layui-badge layui-bg-cyan"><i class="fa fa-venus">已取消</i></span>
+  	{{#  } }}
+	{{#  if(d.status == "7"){ }}
+		<span class="layui-badge layui-bg-black"><i class="fa fa-venus">已删除</i></span>
+  	{{#  } }}
+    
+</script>
+@}

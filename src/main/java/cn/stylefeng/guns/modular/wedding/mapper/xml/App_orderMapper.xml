@@ -1,5 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.stylefeng.guns.modular.wedding.mapper.App_orderMapper">
+	<resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.wedding.entity.App_order">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="order_num" jdbcType="VARCHAR" property="order_num" />
+		<result column="buyer_name" jdbcType="VARCHAR" property="buyer_name" />
+		<result column="buyer_mobile" jdbcType="VARCHAR" property="buyer_mobile" />
+		<result column="buyer_email" jdbcType="VARCHAR" property="buyer_email" />
+		<result column="price" jdbcType="DOUBLE" property="price" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<association property="product" javaType="cn.stylefeng.guns.modular.wedding.entity.App_product">
+			<id column="product_id" property="id"/>
+			<result column="product_title" property="title"/>
+			<result column="product_start_city" property="start_city"/>
+			<association property="area" javaType="cn.stylefeng.guns.modular.wedding.entity.App_area">
+				<id column="area_id" property="id"/>
+				<result column="area_name" property="name"/>
+			</association>
+		</association>
+		<association property="store" javaType="cn.stylefeng.guns.modular.wedding.entity.App_store">
+			<id column="store_id" property="id"/>
+			<result column="store_name" property="name"/>
+			<result column="store_tel" property="tel"/>
+			<result column="store_address" property="address"/>
+		</association>
+		<collection property="passengers" ofType="cn.stylefeng.guns.modular.wedding.entity.App_passenger" column="id" select="selectPassneger" ></collection>
+	</resultMap>
+	
+	<select id="selectPassneger" resultType="cn.stylefeng.guns.modular.wedding.entity.App_passenger">
+		SELECT ap.*
+		FROM app_order_passenger app
+		LEFT JOIN app_passenger ap ON app.passenger_id = ap.id
+		where app.order_id = #{id}
+	</select>
+
+
+	<!-- 查询订单 -->
+	<select id="selectOrders" resultType="map">
+		SELECT 
+			ao.*,ap.title as product_name,ast.`name` as store_name
+		FROM app_order ao 
+		LEFT JOIN app_product ap ON ao.product_id = ap.id
+		LEFT JOIN app_store ast ON ap.store_id = ast.id
+		where ao.status NOT in (5,6)
+		<!-- <if test="condition!=null and condition!=''">
+			and concat_ws(',',ap.title,ap.description,ap.start_city,aa.name) like CONCAT('%',#{condition,jdbcType=VARCHAR},'%')
+		</if> -->
+		<if test="condition!=null and condition!=''">
+			and concat_ws(',',ap.title,ast.name,ap.ao.buyer_name) like CONCAT('%',#{condition,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="orderStatus!=null and orderStatus!=''">
+			and ao.status = #{orderStatus,jdbcType=VARCHAR}
+		</if>
+	</select>
+	
+	<!-- 查询申请退款订单 -->
+	<select id="selectDrawBackOrders" resultType="map">
+		SELECT 
+			ao.*,ap.title as product_name,ast.`name` as store_name
+		FROM app_order ao 
+		LEFT JOIN app_product ap ON ao.product_id = ap.id
+		LEFT JOIN app_store ast ON ap.store_id = ast.id
+		where ao.status in (5,6)
+		<if test="condition!=null and condition!=''">
+			and concat_ws(',',ap.title,ast.name,ap.ao.buyer_name) like CONCAT('%',#{condition,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="orderStatus!=null and orderStatus!=''">
+			and ao.status = #{orderStatus,jdbcType=VARCHAR}
+		</if>
+	</select>
+	
+	<!-- 设置订单状态 -->
+	<update id="setStatus">
+		update app_order SET app_order.`status` = #{status,jdbcType=INTEGER} where app_order.id = #{orderId,jdbcType=INTEGER}
+	</update>
+	
+	<!-- 显示订单详情 -->
+	<select id="showDetail" resultMap="BaseResultMap">
+		SELECT ao.*, ap.title product_title, ap.start_city product_start_city, ast.name store_name ,ast.tel store_tel,aa.name area_name
+		FROM app_order ao 
+		LEFT JOIN app_product ap ON ao.product_id = ap.id
+		LEFT JOIN app_store ast ON ast.id = ap.store_id
+		LEFT JOIN app_area aa ON ap.target_city = aa.id
+		where ao.id = #{orderId}
+	</select>
+	
+	<!-- g根据订单查询对应乘客信息  -->
+	<select id="selectPassengers" resultType="Map">
+		SELECT ap.*
+		FROM app_order_passenger app
+		LEFT JOIN app_passenger ap ON app.passenger_id = ap.id
+		where app.order_id = #{orderId}
+	</select>
 
 </mapper>

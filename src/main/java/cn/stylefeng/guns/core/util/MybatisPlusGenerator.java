@@ -26,30 +26,30 @@ public class MybatisPlusGenerator {
 		GlobalConfig gc = new GlobalConfig();
 		String projectPath = System.getProperty("user.dir");
 		
-		//全局配置
-		gc.setAuthor("warren");
+		//s全局配置
+		gc.setAuthor("Jason");
 		gc.setOpen(true);
 		gc.setOutputDir(projectPath + "/src/main/java");
 		
-		//数据源配置
+		//s数据源配置
 		DataSourceConfig dsc = new DataSourceConfig();
 		dsc.setDbType(DbType.MYSQL);
 		dsc.setDriverName("com.mysql.cj.jdbc.Driver");
 		dsc.setUrl("jdbc:mysql://localhost:3306/guns?useSSL=false&serverTimezone=UTC");
 		dsc.setUsername("root");
-		dsc.setPassword("warren");
+		dsc.setPassword("123456");
 		dsc.setSchemaName("guns");
 		dsc.setTypeConvert(new MySqlTypeConvert());
 		
-		//包配置
+		//s包配置
 		PackageConfig pc = new PackageConfig();
 		pc.setParent("cn.stylefeng.guns.modular");
 		pc.setModuleName("wedding");
 		
-		//策略配置
+		//s策略配置
 		StrategyConfig sc = new StrategyConfig();
 		//sc.setColumnNaming(NamingStrategy.underline_to_camel);
-		sc.setInclude(new String[] {"app_area","app_order","app_picture","app_product","app_store"});
+		sc.setInclude(new String[] {"app_order"});
 		sc.setEntityLombokModel(true);
 		sc.setEntityTableFieldAnnotationEnable(true);
 		

@@ -19,7 +19,7 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
     // 让当前iframe弹层高度适应
     admin.iframeAuto();
 
-    //获取用户信息
+    //s获取用户信息
     var ajax = new $ax(Feng.ctxPath + "/mgr/getUserInfo?userId=" + Feng.getUrlParam("userId"));
     var result = ajax.start();
     form.val('userForm', result.data);
@@ -28,8 +28,8 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
     $('#deptName').click(function () {
         var formName = encodeURIComponent("parent.UserInfoDlg.data.deptName");
         var formId = encodeURIComponent("parent.UserInfoDlg.data.deptId");
-        var treeUrl = encodeURIComponent(Feng.ctxPath + "/dept/tree");
-
+        // var treeUrl = encodeURIComponent(Feng.ctxPath + "/dept/tree");
+        var treeUrl = encodeURIComponent("/dept/tree");
         layer.open({
             type: 2,
             title: '部门选择',

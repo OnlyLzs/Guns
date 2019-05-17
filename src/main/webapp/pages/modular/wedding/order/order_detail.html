@@ -1,0 +1,63 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/wedding/order/order_detail.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">订单管理</span>
+</div>
+
+<div class="layui-fluid">
+<input type="text" value="${order.id}" hidden="hidden" id="orderId">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+					<div class="layui-row">
+						<div class="layui-col-xs3">
+							<div class="grid-demo grid-demo-bg1">承办店铺：</div>
+						</div>
+						<div class="layui-col-xs3">
+							<div class="grid-demo grid-demo-bg1">名称 ${order.store.name}</div>
+						</div>
+						<div class="layui-col-xs3">
+							<div class="grid-demo">电话 ${order.store.tel}</div>
+						</div>
+						<div class="layui-col-xs3">
+							<div class="grid-demo">&nbsp</div>
+						</div>
+					</div>
+					<div class="layui-row">
+						<div class="layui-col-xs3">
+							<div class="grid-demo grid-demo-bg1">商品信息：</div>
+						</div>
+						<div class="layui-col-xs3">
+							<div class="grid-demo grid-demo-bg1">名称 ${order.product.title}</div>
+						</div>
+						<div class="layui-col-xs3">
+							<div class="grid-demo">出发  ${order.product.start_city}</div>
+						</div>
+						<div class="layui-col-xs3">
+							<div class="grid-demo">目的  ${order.product.area.name}</div>
+						</div>
+					</div>
+					<div class="layui-row">
+						<div class="layui-col-xs3">
+							<div class="grid-demo grid-demo-bg1">联系人信息：</div>
+						</div>
+						<div class="layui-col-xs3">
+							<div class="grid-demo grid-demo-bg1">名称 ${order.buyer_name}</div>
+						</div>
+						<div class="layui-col-xs3">
+							<div class="grid-demo">手机 ${order.buyer_mobile}</div>
+						</div>
+						<div class="layui-col-xs3">
+							<div class="grid-demo">邮箱 ${order.buyer_email}</div>
+						</div>
+					</div>
+					
+					<table class="layui-table" id="userTable" lay-filter="userTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@}

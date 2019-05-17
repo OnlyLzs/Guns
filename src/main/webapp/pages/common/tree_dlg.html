@@ -72,6 +72,7 @@
         };
 
         ZTreeDlg.onDBClickItem = function (e, treeId, treeNode) {
+        	console.log(ZTreeDlg.instance.getSelectedVal());
             ${formName} = ZTreeDlg.instance.getSelectedVal();
             ${formId} = treeNode.id;
             parent.layer.close(ZTreeDlg.index);
