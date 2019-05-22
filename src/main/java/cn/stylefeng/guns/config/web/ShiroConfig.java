@@ -181,6 +181,7 @@ public class ShiroConfig {
             hashMap.put(nonePermissionRe, "anon");
         }
         hashMap.put("/**", "user");
+        hashMap.put("/images/**", "anon"); //匿名访问静态资源
         shiroFilter.setFilterChainDefinitionMap(hashMap);
         return shiroFilter;
     }

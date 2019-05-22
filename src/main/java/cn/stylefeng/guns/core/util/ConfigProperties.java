@@ -23,9 +23,9 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class ConfigProperties {
 	
-	@Value("${pictureDisk}")
-	private String pictureDisk;	
+	@Value("${picture.location}")
+	private String pictureLocation;	
 	
-	@Value("${pictureServer}")
+	@Value("${picture.server}")
 	private String pictureServer;
 }

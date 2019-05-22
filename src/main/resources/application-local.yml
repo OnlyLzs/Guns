@@ -4,8 +4,6 @@ spring:
     username: root
     password: 123456
     filters: wall,mergeStat
-pictureDisk: E:\picture\wedding\
-pictureServer: http://192.168.1.84:8080/guns/
 
 #多数据源情况的配置
 guns:
@@ -17,3 +15,8 @@ guns:
     dataSourceNames:
     - dataSourceGuns
     - dataSourceBiz
+   
+#自定义变量
+picture:
+  location: E:\picture\wedding\
+  server: http://192.168.1.84:8080/guns/

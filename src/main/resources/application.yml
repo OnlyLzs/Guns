@@ -17,14 +17,13 @@ beetl:
 
 mybatis-plus.configuration.map-underscore-to-camel-case: false
 
-pictureDisk: E:\productE\images\
 
 spring:
   profiles:
     active: @spring.active@
   static-path-pattern: /**
   resources:
-    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${pictureDisk}
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${picture.location}
   mvc:
     view:
       prefix: /pages

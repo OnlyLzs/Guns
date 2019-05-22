@@ -139,7 +139,7 @@ public class App_areaController extends BaseController{
             throw new ServiceException(BizExceptionEnum.REQUEST_NULL);
         }
     
-        this.iApp_areaService.delMenuContainSubMenus(id, configProperties.getPictureDisk());
+        this.iApp_areaService.delMenuContainSubMenus(id, configProperties.getPictureLocation());
         return SUCCESS_TIP;
     }
     
@@ -154,9 +154,9 @@ public class App_areaController extends BaseController{
     @BussinessLog(value = "菜单新增", key = "name", dict = MenuDict.class)
     @ResponseBody
     public ResponseData add(MultipartFile file,App_area app_area) throws Exception{
-		String img_url = ImageUtil.saveToDiskFromMultipartFile(file, configProperties.getPictureDisk());
-		app_area.setCreate_time(new SimpleDateFormat().format(new Date()));
-		app_area.setUpdate_time(new SimpleDateFormat().format(new Date()));
+		String img_url = ImageUtil.saveToDiskFromMultipartFile(file, configProperties.getPictureLocation());
+		app_area.setCreate_time(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+		app_area.setUpdate_time(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 		app_area.setImg_url(img_url);
 		if(app_area.getParent_id() == 0) {
 			app_area.setLevel("1");
@@ -202,12 +202,12 @@ public class App_areaController extends BaseController{
     	
     	if(file!=null && !file.isEmpty()) {
     		App_area oldArea = this.iApp_areaService.getById(area.getId());
-    		File oldPicture = new File(configProperties.getPictureDisk() + oldArea.getImg_url());
+    		File oldPicture = new File(configProperties.getPictureLocation() + oldArea.getImg_url());
     		if(oldPicture.exists()) {
     			oldPicture.delete();
     		}
     		
-    		String img_url = ImageUtil.saveToDiskFromMultipartFile(file, configProperties.getPictureDisk());
+    		String img_url = ImageUtil.saveToDiskFromMultipartFile(file, configProperties.getPictureLocation());
     		area.setImg_url(img_url);
     	}
     	this.iApp_areaService.updateById(area);

@@ -43,9 +43,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class App_productServiceImpl extends ServiceImpl<App_productMapper, App_product> implements IApp_productService {
 
-	@Value("${pictureDisk}")
+	@Value("${picture.location}")
 	private String uploadPath;
-	@Value("${pictureServer}")
+	@Value("${picture.server}")
 	private String serverUrl;
 	
 	

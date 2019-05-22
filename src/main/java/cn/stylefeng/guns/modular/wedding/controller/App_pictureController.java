@@ -108,7 +108,7 @@ public class App_pictureController extends BaseController{
     	
     	App_picture picture = this.iApp_pictureService.getById(id);
     	if(picture!=null) {
-    		File file = new File(configProperties.getPictureDisk() + picture.getImg_url());
+    		File file = new File(configProperties.getPictureLocation() + picture.getImg_url());
     		if(file.exists()) {
     			file.delete();
     		}
@@ -143,9 +143,8 @@ public class App_pictureController extends BaseController{
     @RequestMapping(value = "/add")
     @ResponseBody
     public ResponseData add(MultipartFile file, App_picture app_picture) throws Exception{
-    	String img_url = ImageUtil.saveToDiskFromMultipartFile(file, configProperties.getPictureDisk());
-    	app_picture.setCreate_time(new SimpleDateFormat().format(new Date()));
-    	app_picture.setUpdate_time(new SimpleDateFormat().format(new Date()));
+    	String img_url = ImageUtil.saveToDiskFromMultipartFile(file, configProperties.getPictureLocation());
+    	app_picture.setCreate_time(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
     	app_picture.setImg_url(img_url);
     	app_picture.setOption_id(ShiroKit.getUser().getId().intValue());
     	this.iApp_pictureService.save(app_picture);
@@ -164,17 +163,17 @@ public class App_pictureController extends BaseController{
     @ResponseBody
     public ResponseData edit(@RequestParam(required=false,name="file") MultipartFile file, App_picture app_picture, Boolean picUpdateFlag) throws Exception{
     	if(picUpdateFlag) {
-    		File oldFile = new File(configProperties.getPictureDisk() + app_picture.getImg_url());
+    		File oldFile = new File(configProperties.getPictureLocation() + app_picture.getImg_url());
     		if(oldFile.exists()) {
     			oldFile.delete();
     		}
-    		String img_url = ImageUtil.saveToDiskFromMultipartFile(file, configProperties.getPictureDisk());
+    		String img_url = ImageUtil.saveToDiskFromMultipartFile(file, configProperties.getPictureLocation());
     		app_picture.setImg_url(img_url);
     		app_picture.setOption_id(ShiroKit.getUser().getId().intValue());
-    		app_picture.setUpdate_time(new SimpleDateFormat().format(new Date()));
+    		app_picture.setUpdate_time(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
     	}else {
     		app_picture.setOption_id(ShiroKit.getUser().getId().intValue());
-    		app_picture.setUpdate_time(new SimpleDateFormat().format(new Date()));
+    		app_picture.setUpdate_time(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
     	}
     	this.iApp_pictureService.updateById(app_picture);
         return SUCCESS_TIP;

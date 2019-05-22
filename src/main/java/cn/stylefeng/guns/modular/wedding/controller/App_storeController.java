@@ -117,7 +117,7 @@ public class App_storeController extends BaseController{
     @RequestMapping(value = "/add")
     @ResponseBody
     public ResponseData add(MultipartFile file, App_store app_store) throws Exception{
-    	String img_url = ImageUtil.saveToDiskFromMultipartFile(file, configProperties.getPictureDisk());
+    	String img_url = ImageUtil.saveToDiskFromMultipartFile(file, configProperties.getPictureLocation());
     	app_store.setCreate_time(new SimpleDateFormat().format(new Date()));
     	app_store.setUpdate_time(new SimpleDateFormat().format(new Date()));
     	app_store.setImg_url(img_url);
@@ -139,7 +139,7 @@ public class App_storeController extends BaseController{
     	
     	App_store store = this.iApp_storeService.getById(id);
     	if(store!=null) {
-    		File file = new File(configProperties.getPictureDisk() + store.getImg_url());
+    		File file = new File(configProperties.getPictureLocation() + store.getImg_url());
     		if(file.exists()) {
     			file.delete();
     		}
@@ -181,11 +181,11 @@ public class App_storeController extends BaseController{
 		String img_name = app_store.getImg_url().substring(index, oldImg_url.length());
 		
     	if(picUpdateFlag) {
-    		File oldFile = new File(configProperties.getPictureDisk() + img_name);
+    		File oldFile = new File(configProperties.getPictureLocation() + img_name);
     		if(oldFile.exists()) {
     			oldFile.delete();
     		}
-    		String img_url = ImageUtil.saveToDiskFromMultipartFile(file, configProperties.getPictureDisk());
+    		String img_url = ImageUtil.saveToDiskFromMultipartFile(file, configProperties.getPictureLocation());
     		app_store.setImg_url(img_url);
     	}else {
     		app_store.setImg_url(img_name);
