@@ -1,5 +1,6 @@
-pictureDisk: /home/picture/wedding/
-pictureServer: http://37.107.73.210:8080/guns/
+picture:
+  location: /home/picture/wedding/
+  server: http://39.107.73.210:8080/guns/
 spring:
   datasource:
     url: jdbc:mysql://39.107.73.210/guns?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT

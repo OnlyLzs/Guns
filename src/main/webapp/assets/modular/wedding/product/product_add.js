@@ -24,6 +24,8 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax', 'upload'], function () {
       ,auto: false
       ,multiple: true
       ,choose: function(obj){
+    	//s清空预览框
+    	  document.getElementById('productPicturesPreview').innerHTML = "";
     	//s预读本地文件示例，不支持ie8
           obj.preview(function(index, file, result){
             console.log(index+"--"+file+"--"+result);

@@ -20,11 +20,14 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.RandomUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -65,7 +68,8 @@ public class App_productServiceImpl extends ServiceImpl<App_productMapper, App_p
 	@Override
 	@Transactional
 	public boolean addProduct(@Valid App_product product, MultipartFile[] productPictures) throws IOException {
-		product.setNumb(Math.random()*10000+"");
+		//s生成编号规则 当前日期 加上随机5位数
+		product.setNumb(new SimpleDateFormat("yyyyMMddhhmmss").format(new Date())+RandomUtils.nextInt(10000, 99999));
 		int insert = this.baseMapper.insert(product);
 		for(MultipartFile picture: productPictures) {
 			//s保存图片到本地

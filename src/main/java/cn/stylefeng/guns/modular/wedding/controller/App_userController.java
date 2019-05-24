@@ -91,7 +91,7 @@ public class App_userController extends BaseController {
     
     
     /**
-     * @Description 删除商品
+     * @Description 删除用户
      * @author Jason
      * @date 2019年5月14日
      * @param userId
@@ -105,7 +105,7 @@ public class App_userController extends BaseController {
     }
     
     /**
-     * @Description 删除商品
+     * @Description 重置密码
      * @author Jason
      * @date 2019年5月14日
      * @param userId

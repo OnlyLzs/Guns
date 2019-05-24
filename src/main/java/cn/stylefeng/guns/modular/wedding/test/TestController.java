@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,6 +18,9 @@ import cn.stylefeng.roses.core.base.controller.BaseController;
 public class TestController extends BaseController{
 	
 	private static String PREFIX = "/modular/wedding/test/";
+	
+	@Value("${picture.location}")
+	String rootPath;
 	
 	@RequestMapping("/ueditor")
 	public String ueditor() {
@@ -36,7 +40,7 @@ public class TestController extends BaseController{
 //		}
 		/*String rootPath = request.getSession().getServletContext().getRealPath("/");
 		String configPath="/assets/common/plugins/ueditor/jsp/config.json";*/
-		String rootPath = "E:\\picture\\wedding";
+		//String rootPath = "E:\\picture\\wedding";
 		String configPath = "/config.json";
 		try {
 			request.setCharacterEncoding( "utf-8" );
